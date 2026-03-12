@@ -1,0 +1,81 @@
+## DAX Measures Used in Project
+
+### DAPS Dynamic Title
+DAPS Dynamic Title =
+VAR SelectedGroup = SELECTEDVALUE('Measures Data'[Product group])
+VAR MetricType = SELECTEDVALUE('Measures Data'[Metrics Type])
+
+RETURN
+SWITCH(
+TRUE(),
+
+MetricType = "Productivity" && NOT(ISBLANK(SelectedGroup)),  
+    "DAPS Productivity - " & SelectedGroup,  
+
+MetricType = "Productivity" && ISBLANK(SelectedGroup),  
+    "DAPS Productivity -",  
+
+MetricType = "Predictability" && NOT(ISBLANK(SelectedGroup)),  
+    "DAPS Predictability - " & SelectedGroup,  
+
+MetricType = "Predictability" && ISBLANK(SelectedGroup),  
+    "DAPS Predictability -",  
+
+MetricType = "Defect Density Per User Story Points" && NOT(ISBLANK(SelectedGroup)),  
+    "DAPS Defect Density Per User Story Points - " & SelectedGroup,  
+
+MetricType = "Defect Density Per User Story Points" && ISBLANK(SelectedGroup),  
+    "DAPS Defect Density Per User Story Points -",  
+
+MetricType = "Assigned user story Points" && NOT(ISBLANK(SelectedGroup)),  
+    "DAPS Assigned Changed StoryPoints Trend - " & SelectedGroup,  
+
+MetricType = "Assigned user story Points" && ISBLANK(SelectedGroup),  
+    "DAPS Assigned Changed StoryPoints Trend -",  
+
+MetricType = "User Stories" && NOT(ISBLANK(SelectedGroup)),  
+    "DAPS User Stories - " & SelectedGroup,  
+
+MetricType = "User Stories" && ISBLANK(SelectedGroup),  
+    "DAPS User Stories -",  
+
+"DAPS -"  
+
+)
+
+### Last Refresh
+Last Refresh =
+"Last Refresh: " & FORMAT(NOW(), "yyyy-MM-dd HH:mm:ss")
+
+### Avgvalue
+Avgvalue =
+AVERAGE('Measures Data BSI'[Value]) / 10
+
+### BSI Dynamic Title
+BSI Dynamic Title =
+VAR SelectedGroup = SELECTEDVALUE('Measures Data BSI'[Product group])
+VAR MetricType = SELECTEDVALUE('Measures Data BSI'[Metrics Type])
+
+RETURN
+SWITCH(
+TRUE(),
+
+MetricType = "Productivity" && NOT(ISBLANK(SelectedGroup)),  
+    "BSI Productivity - " & SelectedGroup,  
+
+MetricType = "Productivity" && ISBLANK(SelectedGroup),  
+    "BSI Productivity -",  
+
+MetricType = "Predictability" && NOT(ISBLANK(SelectedGroup)),  
+    "BSI Predictability - " & SelectedGroup,  
+
+MetricType = "Predictability" && ISBLANK(SelectedGroup),  
+    "BSI Predictability -",  
+
+MetricType = "Defect Density per User story" && NOT(ISBLANK(SelectedGroup)),  
+    "BSI Defect Density Per User story - " & SelectedGroup,  
+
+MetricType = "Defect Density per User story" && ISBLANK(SelectedGroup),  
+    "BSI Defect Density Per User story -",  
+
+"BSI -"  
